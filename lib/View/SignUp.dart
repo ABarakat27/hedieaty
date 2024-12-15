@@ -23,7 +23,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   Future<void> _signUp() async {
     try {
-// Check for username uniqueness
       final usernameExists = await _checkUsername(_usernameController.text);
       if (usernameExists) {
         ScaffoldMessenger.of(context as BuildContext).showSnackBar(
@@ -35,7 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
       }
 
 
-// Create user with email and password
+
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
@@ -43,15 +42,11 @@ class _SignupScreenState extends State<SignupScreen> {
       final uid = userCredential.user?.uid;
 
 
-// Upload profile picture (optional)
       if (_profilePictureUrl != null) {
-// Implement logic to upload image to Firebase Storage
-// Replace with your upload function
         await uploadProfilePicture(_profilePictureUrl!);
       }
 
 
-// Save user data to Firestore
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'email': _emailController.text,
         'username': _usernameController.text,
@@ -59,11 +54,8 @@ class _SignupScreenState extends State<SignupScreen> {
       });
 
 
-// Handle successful signup and sign-in
-// For example, navigate to the home screen
       Navigator.pushReplacementNamed(context as BuildContext, '/login');
     } on FirebaseAuthException catch (e) {
-// Handle errors, such as weak password, invalid email, etc.
       print(e.message);
       ScaffoldMessenger.of(context as BuildContext).showSnackBar(
         SnackBar(
@@ -79,13 +71,9 @@ class _SignupScreenState extends State<SignupScreen> {
         .collection('users')
         .where('username', isEqualTo: username)
         .get();
-    return snapshot.docs.isNotEmpty; snapshot.docs.isNotEmpty;
+    return snapshot.docs.isNotEmpty;
   }
 
-
-// Replace this with your actual profile picture upload logic
-// This function should upload the image to Firebase ;Storage
-// and return the download URL
   Future<void> uploadProfilePicture(String filePath) async {
     try {
       final fileName = basename(filePath);

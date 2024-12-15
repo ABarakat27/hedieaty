@@ -19,10 +19,9 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text,
       );
 
-      // Navigate to the "Hi" page
-      Navigator.pushReplacementNamed(context, '/hi');
+      Navigator.pushReplacementNamed(context, '/homePage');
     } on FirebaseAuthException catch (e) {
-      // Handle errors
+
       print(e.message);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
