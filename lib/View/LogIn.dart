@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text,
       );
 
-      Navigator.pushReplacementNamed(context, '/homePage');
+      Navigator.pushReplacementNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
 
       print(e.message);

@@ -304,12 +304,12 @@ class HiPage extends StatelessWidget {
               },
               child: const Text('Sign Up'),
             ),
-            ElevatedButton(
+            /*ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/home');
               },
               child: const Text('Go to App'),
-            ),
+            ),*/
           ],
         ),
       ),
